@@ -171,21 +171,21 @@ bin/cql-mysql-adapter:
 		-o bin/cql-mysql-adapter \
 		github.com/CovenantSQL/CovenantSQL/cmd/cql-mysql-adapter
 
-bin/cql-faucet:
+bin/cql-proxy:
 	$(GOBUILD) \
 		-ldflags "$(ldflags_role_client)" \
-		-o bin/cql-faucet \
-		github.com/CovenantSQL/CovenantSQL/cmd/cql-faucet
+		-o bin/cql-proxy \
+		github.com/CovenantSQL/CovenantSQL/cmd/cql-proxy
 
 bp: bin/cqld.test bin/cqld
 
 miner: bin/cql-minerd.test bin/cql-minerd
 
-client: bin/cql bin/cql.test bin/cql-fuse bin/cql-mysql-adapter bin/cql-faucet
+client: bin/cql bin/cql.test bin/cql-fuse bin/cql-mysql-adapter bin/cql-proxy
 
 all: bp miner client
 
-build-release: bin/cqld bin/cql-minerd bin/cql bin/cql-fuse bin/cql-mysql-adapter bin/cql-faucet
+build-release: bin/cqld bin/cql-minerd bin/cql bin/cql-fuse bin/cql-mysql-adapter bin/cql-proxy
 
 release:
 	make -j$(JOBS) build-release
@@ -207,5 +207,5 @@ clean:
 
 .PHONY: status start stop logs push push_testnet clean \
 	bin/cqld.test bin/cqld bin/cql-minerd.test bin/cql-minerd \
-	bin/cql bin/cql.test bin/cql-fuse bin/cql-mysql-adapter bin/cql-faucet \
+	bin/cql bin/cql.test bin/cql-fuse bin/cql-mysql-adapter bin/cql-proxy \
 	release android-release
